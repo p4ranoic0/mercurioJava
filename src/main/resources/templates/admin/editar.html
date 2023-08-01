@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{master.html}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css" th:href="@{/css/bootstrap.css}">
+
+    <title>Editar Curso</title>
+</head>
+<body>
+
+<div class="container mt-5" layout:fragment="contenido_dinamico">
+    <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-6">
+    <form th:action="@{''}" th:object="${curso}" method="post" autocomplete="off" enctype="multipart/form-data">
+        <img class="mb-4" src="" alt="" width="72" height="57">
+        <h1 class="h3 mb-3 fw-normal">Editar Curso</h1>
+
+        <label><span></span></label>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="titulo" placeholder="titulo"
+                   th:field="*{titulo}"/>
+            <label for="titulo">Titulo</label>
+        </div>
+        <div class="form-floating">
+                <textarea type="text" class="form-control" id="descripcion" placeholder="descripcion"
+                          th:field="*{descripcion}"></textarea>
+            <label for="descripcion">Descripcion</label>
+        </div>
+        <div class="form-floating">
+            <input type="number" class="form-control" id="precio" placeholder="Precio"
+                   th:field="*{precio}" step="0.01"/>
+            <label for="precio">Precio</label>
+        </div>
+
+        <div class="form-floating">
+            <input type="file" class="form-control" id="imagen" accept="image/*"
+                   th:field="*{imagen}"/>
+            <label for="imagen">Imagen: [[*{rutaImagen}]]</label>
+        </div>
+
+        <button class="w-100 btn btn-lg btn-secondary" type="submit">Guardar</button>
+        <br> <br>
+
+        <p>
+            <a class="w-100 btn btn-lg btn-outline-dark" th:href="@{/cursos}">Regresar</a>
+        </p>
+        <p class="mt-5 mb-3 text-muted">&copy; Feb 2022</p>
+    </form>
+
+            </div>
+    </div>
+</div>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{master.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio</title>
+
+    <div layout:fragment="styles">
+        <style>
+        .banner {
+                background: url(/banner.jpg) center no-repeat;
+                min-height: 500px;
+                background-size: cover;
+                position:relative;
+                z-index:-2;
+            }
+            .banner .overlay {
+                background: rgba(0,0,0,0.25);
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: -1;
+            }
+
+
+        </style>
+    </div>
+
+</head>
+<body>
+<div layout:fragment="contenido_dinamico">
+    <div class="banner">
+        <div class="overlay"></div>
+        <div class="container text-white">
+            <h1>CURSO ISIL DAE2</h1>
+            <p>ISIL Aprende Haciendo!!</p>
+
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <h3 class="text-primary">Últimos cursos publicados</h3>
+        <div class="row">
+            <div th:each="curso : ${ultimosCursos}" th:object="${curso}" class="col-md-4 col-lg-3 mb-3">
+
+                <div class="card shadow h-100">
+                    <img th:src="@{/media/{rutaImagen}(rutaImagen=*{rutaImagen})}" class="card-img-top"
+                         th:alt="*{titulo}">
+                    <div class="card-body">
+                        <h5 class="card-title">[[*{titulo}]]</h5>
+                        <div class="card-text">
+                            <div>
+                                [[*{descripcion}]]
+                            </div>
+                            <div class="my-3 text-danger fw-bold">
+                                $[[*{#numbers.formatDecimal(precio, 1,'COMMA',2,'POINT')}]]
+                            </div>
+                        </div>
+
+                        <div class="d-grid">
+                            <a th:href="@{/cursos/{id}(id=*{id})}" class="btn btn-primary">
+                                Ver detalles
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>

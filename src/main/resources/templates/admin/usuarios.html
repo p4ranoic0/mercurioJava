@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{master.html}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registro</title>
+</head>
+<body>
+<div class="container mt-5" layout:fragment="contenido_dinamico">
+    <div class="text-end">
+        <a href="/usuarios/nuevo" class="btn btn-primary">Nuevo Usuario</a>
+    </div>
+
+    <table class="table table-responsive table-hover">
+        <thead>
+        <tr>
+
+            <th>ID</th>
+            <th>NOMBRES</th>
+            <th>APELLIDOS</th>
+            <th>EMAIL</th>
+            <th>ROL</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="usuario : ${usuarios}" th:object="${usuario}">
+            <td th:text="*{id}"></td>
+            <td th:text="*{nombres}"></td>
+            <td th:text="*{apellidos}"></td>
+            <td th:text="*{email}"></td>
+            <td th:text="*{rol}"></td>
+            <td class="text-end">
+                <div class="btn-group btn-group-sm">
+                    <a th:href="@{/usuarios/{id}/editar(id=*{id})}" class="btn btn-primary" title="Editar usuario"><i
+                            class="fa fa-edit"></i></a>
+
+                    <a onclick="eliminarUsuario(this)" href="#" class="btn btn-danger" title="Eliminar usuario"><i
+                            class="fa fa-trash"></i></a>
+                    <form th:action="@{/usuarios/{id}/eliminar(id=*{id})}" method="post" class="d-none"></form>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    function eliminarUsuario(elem){
+        var ok=confirm('Estas seguro de eliminar el usuario?');
+        if(ok){
+        elem.nextElementSibling.submit();
+        }
+    }
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

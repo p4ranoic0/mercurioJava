@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{master.html}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css" th:href="@{/css/bootstrap.css}">
+
+    <title>Nuevo Curso</title>
+</head>
+<body>
+
+<div class="container mt-5" layout:fragment="contenido_dinamico">
+    <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-6">
+            <form th:action="@{''}" method="post" th:object="${curso}" enctype="multipart/form-data" class="mt-3">
+                <img class="mb-4" src="" alt="" width="72" height="57">
+                <h1 class="h3 mb-3 fw-normal">Nuevo Curso</h1>
+
+                <label><span></span></label>
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="titulo" placeholder="titulo"
+                           th:field="*{titulo}" th:errorclass="is-invalid"/>
+                    <div th:errors="*{titulo}"
+                         th:if="${#fields.hasErrors('titulo')}"
+                         class="invalid-feedback">
+                    </div>
+                    <label for="titulo">Titulo</label>
+                </div>
+                <div class="form-floating">
+                <textarea type="text" class="form-control" id="descripcion" placeholder="descripcion"
+                          th:field="*{descripcion}" th:errorclass="is-invalid"></textarea>
+                    <label for="descripcion">Descripcion</label>
+                    <div th:errors="*{descripcion}"
+                         th:if="${#fields.hasErrors('descripcion')}"
+                         class="invalid-feedback">
+                    </div>
+                </div>
+                <div class="form-floating">
+                    <input type="number" class="form-control" id="precio" placeholder="Precio"
+                           th:field="*{precio}" step="0.01" th:errorclass="is-invalid"/>
+                    <label for="precio">Precio</label>
+                    <div th:errors="*{precio}"
+                         th:if="${#fields.hasErrors('precio')}"
+                         class="invalid-feedback">
+                    </div>
+                </div>
+
+                <div class="form-floating">
+                    <input type="file" class="form-control" id="imagen" accept="image/*"
+                           th:field="*{imagen}" th:errorclass="is-invalid"/>
+                    <label for="imagen">Imagen: [[*{rutaImagen}]]</label>
+                    <div th:errors="*{imagen}"
+                         th:if="${#fields.hasErrors('imagen')}"
+                         class="invalid-feedback">
+                    </div>
+                </div>
+
+                <button class="w-100 btn btn-lg btn-secondary" type="submit">Guardar</button>
+                <br> <br>
+                <p>
+                    <a class="w-100 btn btn-lg btn-outline-dark" th:href="@{/cursos}">Regresar</a>
+                </p>
+                <p class="mt-5 mb-3 text-muted">&copy; Nov 2022</p>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

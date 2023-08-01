@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{master.html}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registro</title>
+</head>
+<body>
+<div class="container mt-5" layout:fragment="contenido_dinamico">
+    <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-6">
+            <form th:action="@{''}" th:object="${usuario}" method="post" autocomplete="off">
+                <img class="mb-4" src="" alt="" width="72" height="57">
+                <h1 class="h3 mb-3 fw-normal">Nuevo Usuario</h1>
+
+                <label><span></span></label>
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="nombres" placeholder="Nombres"
+                           th:field="*{nombres}" th:errorclass="is-invalid"/>
+                    <div th:errors="*{nombres}"
+                         th:if="${#fields.hasErrors('nombres')}"
+                         class="invalid-feedback">
+                    </div>
+                    <label for="nombres">Nombres</label>
+                </div>
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="apellidos" placeholder="Apellidos"
+                           th:field="*{apellidos}" th:errorclass="is-invalid"/>
+                    <div th:errors="*{apellidos}"
+                         th:if="${#fields.hasErrors('apellidos')}"
+                         class="invalid-feedback">
+                    </div>
+                    <label for="apellidos">Apellidos</label>
+                </div>
+                <div class="form-floating">
+                    <input type="email" class="form-control" id="email" placeholder="Email"
+                           th:field="*{email}" th:errorclass="is-invalid"/>
+                    <div th:errors="*{email}"
+                         th:if="${#fields.hasErrors('email')}"
+                         class="invalid-feedback">
+                    </div>
+                    <label for="email">Email</label>
+                </div>
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="password" placeholder="Contraseña"
+                           th:field="*{password}" th:errorclass="is-invalid"/>
+                    <div th:errors="*{password}"
+                         th:if="${#fields.hasErrors('password')}"
+                         class="invalid-feedback">
+                    </div>
+                    <label for="email">Contraseña</label>
+                </div>
+
+
+                <select class="form-select" aria-label="Default select example" th:field="*{rol}"
+                        th:errorclass="is-invalid">
+                    <option value="ESTUDIANTE" selected>Estudiante</option>
+                    <option value="ADMIN">Administrador</option>
+                    <div th:errors="*{rol}"
+                         th:if="${#fields.hasErrors('rol')}"
+                         class="invalid-feedback">
+                    </div>
+                </select>
+
+
+                <button class="w-100 btn btn-lg btn-secondary" type="submit">Guardar</button>
+                <br> <br>
+
+                <p>
+                    <a class="w-100 btn btn-lg btn-outline-dark" th:href="@{/usuarios}">Regresar</a>
+                </p>
+                <p class="mt-5 mb-3 text-muted">&copy; Feb 2022</p>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
